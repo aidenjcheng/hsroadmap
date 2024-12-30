@@ -62,7 +62,7 @@ export default function Navigation() {
             ) : (
               pathname !== "/login" && (
                 <Button asChild>
-                  <Link href="/login">Sign In</Link>
+                  <Link href="/login/sign-up">Sign In</Link>
                 </Button>
               )
             )}
