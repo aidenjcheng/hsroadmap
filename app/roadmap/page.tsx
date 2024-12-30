@@ -1,14 +1,15 @@
 "use client";
 
+import React, { Suspense, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { activities } from "../data/activities";
-import { useState } from "react";
 import RoadmapFlow from "../components/RoadmapFlow";
 import { YearActivity } from "../types";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
-export default function RoadmapPage() {
+// Create a separate component for the content that uses useSearchParams
+function RoadmapContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedInterests = searchParams.get("interests")?.split(",") || [];
@@ -46,22 +47,27 @@ export default function RoadmapPage() {
   };
 
   return (
+    <div className="max-w-4xl mx-auto">
+      <Button variant="ghost" onClick={() => router.back()} className="mb-6">
+        <ArrowLeft className="mr-2 h-4 w-4" />
+        Back
+      </Button>
+      <RoadmapFlow
+        yearActivities={yearActivities}
+        onToggleActivity={handleToggleActivity}
+      />
+    </div>
+  );
+}
+
+export default function RoadmapPage() {
+  return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto py-8 px-4">
-        <div className="max-w-4xl mx-auto">
-          <Button
-            variant="ghost"
-            onClick={() => router.back()}
-            className="mb-6"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back
-          </Button>
-          <RoadmapFlow
-            yearActivities={yearActivities}
-            onToggleActivity={handleToggleActivity}
-          />
-        </div>
+        {/* Wrap the RoadmapContent with Suspense */}
+        <Suspense fallback={<div>Loading Roadmap...</div>}>
+          <RoadmapContent />
+        </Suspense>
       </main>
     </div>
   );
