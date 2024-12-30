@@ -29,7 +29,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
           priceId || ""
         )}&discountCode=${encodeURIComponent(
           discountCode || ""
-        )}&redirect=${encodeURIComponent("/test")}`,
+        )}&redirect=${encodeURIComponent("/home")}`,
       },
     });
     setLoading(false);
@@ -148,9 +148,9 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
               ? "New to our platform? "
               : "Already have an account? "}
             <Link
-              href={`${mode === "signin" ? "/sign-up" : "/sign-in"}${
-                redirect ? `?redirect=${redirect}` : ""
-              }${priceId ? `&priceId=${priceId}` : ""}`}
+              href={`${
+                mode === "signin" ? "/login/sign-up" : "/login/sign-in"
+              }`}
               className="font-medium text-blue-600 hover:text-blue-500"
             >
               {mode === "signin" ? "Create an account" : "Sign in"}

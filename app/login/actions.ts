@@ -182,7 +182,7 @@ export const signInWithMagicLink = validatedAction(
       options: {
         emailRedirectTo: `${redirectTo}?priceId=${encodeURIComponent(
           priceId || ""
-        )}&redirect=${encodeURIComponent("/test")}`,
+        )}&redirect=${encodeURIComponent("/home")}`,
       },
     });
     if (error) {
@@ -207,7 +207,7 @@ export const signInWithGoogle = async (
       options: {
         redirectTo: `${redirectTo}?priceId=${encodeURIComponent(
           priceId || ""
-        )}&redirect=/test`,
+        )}&redirect=/home`,
       },
     });
     if (signInError) {
