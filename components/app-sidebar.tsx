@@ -1,6 +1,13 @@
 "use client"; // Add this line to ensure the component runs on the client side
-
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import {
+  Calendar,
+  Home,
+  Users,
+  Search,
+  Settings,
+  Flame,
+  Map,
+} from "lucide-react";
 import React, { use, useEffect, useState } from "react";
 import Link from "next/link";
 import {
@@ -17,32 +24,23 @@ import {
 import { usePathname } from "next/navigation";
 import { NavUser } from "@/components/nav-user";
 import { CommandDialogComponent } from "@/components/command-dialogue";
+
 // Menu items.
-const items = [
+export const items = [
   {
     title: "Home",
-    url: "/home",
+    url: "/app",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "/inbox",
-    icon: Inbox,
+    title: "Groups",
+    url: "/app/groups",
+    icon: Users,
   },
   {
-    title: "Calendar",
-    url: "/calendar",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "/search",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
+    title: "Roadmaps",
+    url: "/app/roadmaps",
+    icon: Map,
   },
 ];
 
@@ -61,7 +59,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <Link href="/home" className="px-1 font-medium">
+            <Link href="/app" className="px-1 font-medium">
               Awesome sauce
             </Link>
           </SidebarGroupContent>
@@ -83,10 +81,13 @@ export function AppSidebar() {
                         : ""
                     }`}
                   >
-                    <a href={item.url}>
-                      <item.icon style={{ width: "1rem", height: "1rem" }} />
+                    <Link href={item.url}>
+                      <item.icon
+                        style={{ width: "1.1rem", height: "1.1rem" }}
+                        strokeWidth={2.5}
+                      />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

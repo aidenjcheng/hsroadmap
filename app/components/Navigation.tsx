@@ -10,11 +10,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MenuIcon, User, LogOut, Settings } from "lucide-react";
-import { useAuth } from "../hooks/useAuth";
 
 export default function Navigation() {
   const pathname = usePathname();
-  const { user, signOut } = useAuth();
 
   return (
     <nav className="border-b bg-background">
@@ -23,8 +21,10 @@ export default function Navigation() {
           <Link href="/" className="text-xl font-bold">
             RoadMap Builder
           </Link>
-
-          <div className="flex items-center space-x-4">
+          <Link href="/login/sign-up" className="text-xl font-bold">
+            SIGNIN{" "}
+          </Link>
+          {/* <div className="flex items-center space-x-4">
             {user ? (
               <>
                 <Button variant="ghost" asChild>
@@ -66,7 +66,7 @@ export default function Navigation() {
                 </Button>
               )
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

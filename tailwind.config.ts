@@ -22,6 +22,9 @@ const config: Config = {
       boxShadow: {
         normal: "rgba(17, 24, 39, 0.1) 0px 0px 0px 1px inset",
       },
+      border: {
+        DEFAULT: "1px solid rgba(17, 24, 39, 0.1)",
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

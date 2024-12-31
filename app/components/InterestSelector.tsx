@@ -17,8 +17,6 @@ export default function InterestSelector({
 }: InterestSelectorProps) {
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold">Select Your Interests</h2>
-      <p className="text-muted-foreground">Choose all that apply to you</p>
       <div className="flex flex-wrap gap-3">
         {interests.map((interest) => (
           <Badge
@@ -27,7 +25,7 @@ export default function InterestSelector({
             className={cn(
               "cursor-pointer text-sm py-2 px-4  transition-all hover:hover-effect",
               selectedInterests.includes(interest.id) &&
-                "hover:!shadow-none bg-contrast !text-primary-foreground"
+                "hover:!shadow-none bg-contrast !text-primary-foreground !border-transparent"
             )}
             onClick={() => onSelect(interest.id)}
           >

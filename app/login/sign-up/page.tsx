@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export default async function SignInPage() {
   const user = await getUser();
   if (user) {
-    return redirect("/home");
+    return redirect("/app");
   }
 
   return <Login mode="signup" />;

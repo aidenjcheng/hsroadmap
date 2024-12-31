@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <Navigation />
       <div className="min-h-screen bg-background">
-        Hello this is the main page <Link href="/home">CLICKME</Link>
+        Hello this is the main page <Link href="/app">CLICKME</Link>
       </div>
     </>
   );

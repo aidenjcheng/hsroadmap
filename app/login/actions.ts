@@ -39,7 +39,7 @@ export const signIn = validatedAction(signInSchema, async (data) => {
     }
   }
   // If sign-in is successful, redirect to dashboard
-  redirect("/home");
+  redirect("/app");
 });
 
 const signUpSchema = z.object({
@@ -148,6 +148,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   //   const priceId = formData.get('priceId') as string;
   //   return createCheckoutSession({ team: createdTeam, priceId });
   // }
+
   const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
     email,
     password,
@@ -182,7 +183,7 @@ export const signInWithMagicLink = validatedAction(
       options: {
         emailRedirectTo: `${redirectTo}?priceId=${encodeURIComponent(
           priceId || ""
-        )}&redirect=${encodeURIComponent("/home")}`,
+        )}&redirect=${encodeURIComponent("/app")}`,
       },
     });
     if (error) {
@@ -207,7 +208,7 @@ export const signInWithGoogle = async (
       options: {
         redirectTo: `${redirectTo}?priceId=${encodeURIComponent(
           priceId || ""
-        )}&redirect=/home`,
+        )}&redirect=/app`,
       },
     });
     if (signInError) {
@@ -222,4 +223,14 @@ export const signOut = async () => {
   const supabase = await createClient();
   await supabase.auth.signOut();
   redirect("/sign-in");
+};
+
+export const checkSession = async () => {
+  const supabase = await createClient();
+  const user = await supabase.auth.getUser();
+  if (user.data.user?.aud === "authenticated") {
+    return true;
+  } else {
+    return false;
+  }
 };

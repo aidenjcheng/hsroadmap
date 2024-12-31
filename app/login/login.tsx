@@ -29,7 +29,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
           priceId || ""
         )}&discountCode=${encodeURIComponent(
           discountCode || ""
-        )}&redirect=${encodeURIComponent("/home")}`,
+        )}&redirect=${encodeURIComponent("/app")}`,
       },
     });
     setLoading(false);
@@ -83,7 +83,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
 
                 <Button
                   type="submit"
-                  className="w-full h-12 font-medium text-white bg-blue-600 rounded-lg transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="w-full h-12 font-medium text-white bg-contrast rounded-lg transition-colors hover:bg-contrast  focus:outline-none focus:ring-2 focus:ring-contrast focus:ring-offset-2"
                 >
                   {pending ? (
                     <Loader2 className="w-5 h-5 animate-spin" />

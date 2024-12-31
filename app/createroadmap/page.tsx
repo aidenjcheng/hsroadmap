@@ -8,9 +8,30 @@ import InterestSelector from "../components/InterestSelector";
 import MajorSelector from "../components/MajorSelector";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, RocketIcon } from "lucide-react";
+import { ArrowLeft, Menu, RocketIcon } from "lucide-react";
 import { BreadCrumbs } from "../components/BreadCrumbs";
 import Link from "next/link";
+import { items } from "@/components/app-sidebar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogDescription,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Variants, Transition } from "motion/react";
+
 export default function CreateRoadMap() {
   const router = useRouter();
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
@@ -41,14 +62,7 @@ export default function CreateRoadMap() {
   return (
     <div className="min-h-screen bg-background">
       <div className="py-3 border-b  pl-4 flex gap-3 items-center">
-        <Link href="/home" className="flex items-center">
-          <Button
-            variant="ghost"
-            className="p-1 h-fit hover:text-foreground text-muted-foreground"
-          >
-            <ArrowLeft className="w-5 h-5 cursor-pointer" />
-          </Button>
-        </Link>
+        <DropDownComponent />
         <BreadCrumbs />
       </div>
       <main className="container mx-auto py-8 px-4">
@@ -61,9 +75,8 @@ export default function CreateRoadMap() {
               Your path to a t20
             </p>
           </div>
-
-          <Card className=" ">
-            <CardContent className="space-y-8 pt-6">
+          <ChooseSpikeDialog>
+            <div className="space-y-8 pt-6 w-full h-full">
               <InterestSelector
                 interests={interests}
                 selectedInterests={selectedInterests}
@@ -85,10 +98,61 @@ export default function CreateRoadMap() {
                   View Your Roadmap
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </ChooseSpikeDialog>
         </div>
       </main>
     </div>
+  );
+}
+
+const DropDownComponent = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="p-1 h-fit ">
+          <Menu className="w-5 h-5 cursor-pointer" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        className="w-[--radix-dropdown-menu-trigger-width] rounded-lg ml-4"
+        style={{}}
+        side={"bottom"}
+        align="end"
+        sideOffset={4}
+      >
+        <DropdownMenuGroup>
+          {items.map((item) => (
+            <Link href={item.url} key={item.title}>
+              <DropdownMenuItem>
+                <item.icon
+                  style={{ width: "1.1rem", height: "1.1rem" }}
+                  strokeWidth={2.5}
+                />
+                <span>{item.title}</span>
+              </DropdownMenuItem>
+            </Link>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+export function ChooseSpikeDialog({ children }: { children: React.ReactNode }) {
+  return (
+    <Dialog>
+      <DialogTrigger>
+        <Button variant="outline">Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent className="w-full max-w-3xl bg-white p-6 dark:bg-zinc-900">
+        <DialogTitle>Choose Your Spike</DialogTitle>
+        <DialogDescription>
+          Choose your interests and major to get started
+        </DialogDescription>
+        {children}
+        <DialogClose />
+      </DialogContent>
+    </Dialog>
   );
 }

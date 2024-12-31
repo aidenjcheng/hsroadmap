@@ -12,7 +12,7 @@ export function BreadCrumbs() {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/home">Home</BreadcrumbLink>
+          <BreadcrumbLink href="/app">Home</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
           <Slash />

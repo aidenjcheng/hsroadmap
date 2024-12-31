@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
-import { PanelLeft } from "lucide-react";
+import { Menu, PanelLeft } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -219,6 +219,7 @@ const Sidebar = React.forwardRef<
         data-collapsible={state === "collapsed" ? collapsible : ""}
         data-variant={variant}
         data-side={side}
+        // style={{ maxWidth: "0" }}
       >
         {/* This is what handles the sidebar gap on desktop */}
         <div
@@ -268,16 +269,16 @@ const SidebarTrigger = React.forwardRef<
     <Button
       ref={ref as React.Ref<HTMLButtonElement>}
       data-sidebar="trigger"
-      variant="ghost"
+      variant="outline"
       size="icon"
-      className={cn("h-7 w-7", className)}
+      className={cn("h-7 w-7 mt-1 ml-1", className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
       }}
       {...props}
     >
-      <PanelLeft style={{ width: "1.2rem", height: "1.2rem" }} />
+      <Menu style={{ width: "1.2rem", height: "1.2rem" }} />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );
